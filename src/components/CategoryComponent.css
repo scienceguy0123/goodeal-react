@@ -1,0 +1,114 @@
+#all{
+    width:15vw;
+    height: 15vw;
+    background-color: rgb(39, 39, 39);
+   
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#clothes{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/clothes.jpg);
+    background-size: contain;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#shoes{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/shoes.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#eletronics{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/eletronics.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#books{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/books.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 2vw;
+}
+
+#furnitures{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/furnitures.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#stationaries{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/stationaries.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#collectibles{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/collectibles.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#services{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/services.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+#others{
+    width:15vw;
+    height: 15vw;
+    background-image: url(../images/others.jpg);
+    background-size: cover;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 1.5vw;
+}
+
+
+
+
+
