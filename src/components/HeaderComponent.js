@@ -137,7 +137,12 @@ class Header extends Component {
                                 id="loginPassword" className="mb-2"></Input>
                             </FormGroup>
                             <FormGroup>
-                                <Button type="submit" value="submit" color="primary">Login</Button>
+                                <Button 
+                                disabled={this.state.loginEmail === '' ||
+                                          this.state.loginPassword === ''}
+                                type="submit" 
+                                value="submit" 
+                                color="primary">Login</Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
@@ -194,7 +199,16 @@ class Header extends Component {
                                 <FormFeedback>Password not identical</FormFeedback>
                             </FormGroup>
                             <FormGroup>
-                                <Button type="submit" value="submit" color="primary">Register</Button>
+                                <Button 
+                                disabled = {this.state.validate.doubleCheckPasswordState === "not same" ||
+                                            this.state.validate.doubleCheckPasswordState === "" ||
+                                            this.state.validate.regEmailState === "not passed" ||
+                                            this.state.validate.regEmailState === "" ||
+                                            this.state.validate.regPasswordState === 'not passed' ||
+                                            this.state.validate.regPasswordState === ''}
+                                type="submit" 
+                                value="submit" 
+                                color="primary">Register</Button>
                             </FormGroup>
                         </Form>
                     </ModalBody>
