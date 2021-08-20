@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './HeaderComponent.css';
-import {Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody,
-Form, FormGroup, Label, FormText, Input, FormFeedback} from 'reactstrap';
+import {Navbar, NavbarBrand, NavbarText,NavItem, Button, Modal, ModalHeader, ModalBody,
+Form, FormGroup, Label, FormText, Input, FormFeedback, Dropdown, DropdownToggle, 
+DropdownMenu, DropdownItem, Container, Row, Col} from 'reactstrap';
 import { Link } from 'react-router-dom'; 
 
 
@@ -20,7 +21,8 @@ class Header extends Component {
                 regEmailState: '',
                 regPasswordState: '',
                 doubleCheckPasswordState:''
-            }
+            },
+            isDropped:false
             
         }
         this.toggleLoginModal = this.toggleLoginModal.bind(this);
@@ -31,6 +33,8 @@ class Header extends Component {
         this.validateEmail = this.validateEmail.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
+        this.toggleDropdown = this.toggleDropdown.bind(this);
+        this.handleLogout =this.handleLogout.bind(this);
     }
     
     toggleLoginModal() {
@@ -42,6 +46,12 @@ class Header extends Component {
     toggleRegisterModal() {
         this.setState({
             isRegisterModalOpen:!this.state.isRegisterModalOpen
+        });
+    }
+
+    toggleDropdown() {
+        this.setState({
+            isDropped:!this.state.isDropped
         });
     }
 
@@ -57,7 +67,11 @@ class Header extends Component {
         event.preventDefault();
         this.toggleRegisterModal();
         this.props.registerUser({username: this.state.registerEmail, password: this.state.registerPassword});
-        alert(JSON.stringify(this.state));
+        // alert(JSON.stringify(this.state));
+    }
+
+    handleLogout() {
+        this.props.logoutUser();
     }
     
     
@@ -105,6 +119,9 @@ class Header extends Component {
 
 
 
+
+
+
     render() {
         return (
             <div>
@@ -112,8 +129,26 @@ class Header extends Component {
                     <NavbarBrand className="ms-5" href="/">
                         <Link to='/home'><img src="images/goodeal-logo.png"  width="150" alt="rcf"/></Link>
                     </NavbarBrand>
-                    <Button color="secondary" className="ms-auto me-5" onClick={this.toggleLoginModal}>Login</Button>
-                    <Button color="secondary"className="me-5" onClick={this.toggleRegisterModal}>Register</Button>
+                    { !this.props.auth.isAuthenticated ?
+                    <>
+                        <Button color="secondary" className="ms-auto me-5" onClick={this.toggleLoginModal}>Login</Button>
+                        <Button color="secondary"className="me-5" onClick={this.toggleRegisterModal}>Register</Button>
+                    </>
+                    :
+                    <>
+                        
+                        <NavbarText className='text-light ms-auto me-5'>{`Hi, ${this.props.auth.user.username}`}</NavbarText>
+                        
+                        <Dropdown isOpen={this.state.isDropped} toggle={this.toggleDropdown} className='me-5 pe-5'>
+                            <DropdownToggle caret>Menu</DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>Sell Something</DropdownItem>
+                                <DropdownItem>I'm Selling...</DropdownItem>
+                                <DropdownItem onClick={(e)=> this.handleLogout()}>Logout</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </>
+                    }
                 </Navbar>
 
                 <Modal isOpen={this.state.isLoginModalOpen} toggle={this.toggleLoginModal} >

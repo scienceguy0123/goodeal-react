@@ -15,13 +15,14 @@ export const Auth = (state = {
                 return {...state,
                     isLoading: true,
                     isAuthenticated: false,
-                    user: action.creds
+                    user: action.creds,
+                    errMess: null
                 };
             case ActionTypes.LOGIN_SUCCESS:
                 return {...state,
                     isLoading: false,
                     isAuthenticated: true,
-                    errMess: '',
+                    errMess: null,
                     token: action.token
                 };
             case ActionTypes.LOGIN_FAILURE:
@@ -29,6 +30,26 @@ export const Auth = (state = {
                     isLoading: false,
                     isAuthenticated: false,
                     errMess: action.message
+                };
+
+            case ActionTypes.LOGOUT_REQUEST:
+                return {...state,
+                    isLoading: true,
+                    isAuthenticated: true,
+                    errMess: null
+                };
+            
+            case ActionTypes.LOGOUT_SUCCESS:
+                return {...state,
+                    isLoading: false,
+                    isAuthenticated: false,
+                    token: '',
+                    user: null
+                };
+            
+            case ActionTypes.LOGOUT_FAILURE:
+                return {...state,
+                    isLoading:false,
                 };
 
             default:

@@ -10,13 +10,14 @@ export const Register = (  state = {
             return {...state,
                 isLoading: true,
                 isAuthenticated: false,
+                errMess:null,
                 user: action.creds
             };
         case ActionTypes.REGISTER_SUCCESS:
             return {...state,
                 isLoading: false,
                 isAuthenticated: true,
-                errMess: '',
+                errMess: null,
                 token: action.token
             };
         case ActionTypes.REGISTER_FAILURE:

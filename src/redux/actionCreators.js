@@ -12,19 +12,19 @@ export const loginUser = (creds) => (dispatch) => {
         },
         body: JSON.stringify(creds)
     })
-    .then(response => {
-        if (response.ok) {
-            console.log(response);
-            return response;
-        } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
-        },
-        error => {
-            throw error;
-        })
+    // .then(response => {
+    //     if (response.ok) {
+    //         console.log(response);
+    //         return response;
+    //     } else {
+    //         var error = new Error('Error ' + response.status + ': ' + response.statusText);
+    //         error.response = response;
+    //         throw error;
+    //     }
+    //     },
+    //     error => {
+    //         throw error;
+    //     })
     .then(response => response.json())
     .then(response => {
         if (response.success) {
@@ -36,7 +36,8 @@ export const loginUser = (creds) => (dispatch) => {
             dispatch(receiveLogin(response));
         }
         else {
-            var error = new Error('Error ' + response.status);
+            console.log(response);
+            var error = new Error('Error ' + response.err.message);
             error.response = response;
             throw error;
         }
@@ -76,25 +77,32 @@ export const registerUser = (creds) => (dispatch) => {
         },
         body: JSON.stringify(creds)
     })
-    .then(response => {
-        if (response.ok) {
-            console.log(response);
-            return response
-        } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
-        },
-        error => {
-            throw error;
-        }
-    )
+    // .then(response => {
+    //     if (response.ok) {
+    //         // console.log(response);
+    //         return response
+    //     } else {
+    //         console.log(response);
+            
+    //         var error = new Error('Error ' + response.status + ': ' + response.statusText);
+    //         error.response = response;
+    //         throw error;
+    //     }
+    //     },
+    //     error => {
+    //         throw error;
+    //     }
+    // )
     .then(response => response.json())
     .then(response => {
         if (response.success){
             console.log(response);
             dispatch(receiveRegister(response));
+        }else{
+            console.log(response);
+            let error = new Error('Error: ' + response.err.message);
+            error.response = response;
+            throw error;
         }
     })
     .catch(error => dispatch(registerError(error.message)))
@@ -119,4 +127,25 @@ export const registerError = (message) => {
         type: ActionTypes.REGISTER_FAILURE,
         message
     }
+}
+
+
+export const requestLogout = () => {
+    return {
+      type: ActionTypes.LOGOUT_REQUEST
+    }
+}
+  
+export const receiveLogout = () => {
+    return {
+      type: ActionTypes.LOGOUT_SUCCESS
+    }
+}
+
+// Logs the user out
+export const logoutUser = () => (dispatch) => {
+    dispatch(requestLogout())
+    localStorage.removeItem('token');
+    localStorage.removeItem('creds');
+    dispatch(receiveLogout())
 }

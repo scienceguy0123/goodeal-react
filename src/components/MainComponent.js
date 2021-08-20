@@ -3,7 +3,7 @@ import Header from './HeaderComponent.js';
 import Home from './HomeComponent.js';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser , registerUser} from '../redux/actionCreators.js';
+import { loginUser , registerUser, logoutUser} from '../redux/actionCreators.js';
 
 const mapStateToProps = state => {
     return {
@@ -14,13 +14,25 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
     loginUser: (creds) => dispatch(loginUser(creds)),
-    registerUser: (creds) => dispatch(registerUser(creds))
+    registerUser: (creds) => dispatch(registerUser(creds)),
+    logoutUser: () => dispatch(logoutUser())
 });
 
 class Main extends Component{
     constructor(props) {
         super(props);
     }
+    
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.register.errMess !== null) {
+          alert(this.props.register.errMess);
+        }
+        else if (this.props.auth.errMess !== null) {
+            alert(this.props.auth.errMess);
+        }
+      }
+
 
     render() {
     const HomePage = () => {
@@ -34,6 +46,7 @@ class Main extends Component{
                 <Header 
                     loginUser={this.props.loginUser}
                     registerUser={this.props.registerUser}
+                    logoutUser={this.props.logoutUser}
                     auth={this.props.auth}
                     register={this.props.register}
                     />
