@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import './HeaderComponent.css';
 import {Navbar, NavbarBrand, Button, Modal, ModalHeader, ModalBody,
 Form, FormGroup, Label, FormText, Input, FormFeedback} from 'reactstrap';
+import { Link } from 'react-router-dom'; 
 
-const required = (val) => val && val.length;
-const maxLength = (len) => (val) => !(val) || (val.length <= len);
-const minLength = (len) => (val) => (val) && (val.length >= len);
-const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class Header extends Component {
     constructor(props) {
@@ -19,7 +16,6 @@ class Header extends Component {
             loginPassword:'',
             registerEmail: '',
             registerPassword: '',
-            // registerPassword2: '',
             validate:{
                 regEmailState: '',
                 regPasswordState: '',
@@ -33,8 +29,8 @@ class Header extends Component {
         this.validatePassword = this.validatePassword.bind(this);
         this.doubleCheckPassword = this.doubleCheckPassword.bind(this);
         this.validateEmail = this.validateEmail.bind(this);
-        this.submitRegister = this.submitRegister.bind(this);
-        this.submitLogin = this.submitLogin.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handleRegister = this.handleRegister.bind(this);
     }
     
     toggleLoginModal() {
@@ -49,6 +45,22 @@ class Header extends Component {
         });
     }
 
+    handleLogin(event) {
+        event.preventDefault();
+        this.toggleLoginModal();
+        this.props.loginUser({username: this.state.loginEmail, password: this.state.loginPassword});
+        alert(JSON.stringify(this.state));
+        
+    }
+
+    handleRegister(event) {
+        event.preventDefault();
+        this.toggleRegisterModal();
+        this.props.registerUser({username: this.state.registerEmail, password: this.state.registerPassword});
+        alert(JSON.stringify(this.state));
+    }
+    
+    
     handleChange = (event) => {
         const {target} =event;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -57,6 +69,7 @@ class Header extends Component {
             [name]: value
         })
     }
+
 
     validateEmail(e) {
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -81,7 +94,7 @@ class Header extends Component {
     }
 
     doubleCheckPassword (e) {
-        //this.state.registerPassword2
+        
         const {validate} = this.state;
         if(e.target.value === this.state.registerPassword) {
             validate.doubleCheckPasswordState = "same";
@@ -90,22 +103,14 @@ class Header extends Component {
         }
     }
 
-    submitRegister(e) {
-        e.preventDefault();
-        alert(JSON.stringify(this.state));
-    }
 
-    submitLogin(e) {
-        e.preventDefault();
-        alert(JSON.stringify(this.state));
-    }
 
     render() {
         return (
             <div>
                 <Navbar color="dark" expand classname="">
                     <NavbarBrand className="ms-5" href="/">
-                        <img src="images/goodeal-logo.png"  width="150" alt="rcf"/>
+                        <Link to='/home'><img src="images/goodeal-logo.png"  width="150" alt="rcf"/></Link>
                     </NavbarBrand>
                     <Button color="secondary" className="ms-auto me-5" onClick={this.toggleLoginModal}>Login</Button>
                     <Button color="secondary"className="me-5" onClick={this.toggleRegisterModal}>Register</Button>
@@ -114,7 +119,7 @@ class Header extends Component {
                 <Modal isOpen={this.state.isLoginModalOpen} toggle={this.toggleLoginModal} >
                     <ModalHeader toggle={this.toggleLoginModal}>Login</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={(e) => this.submitRegister(e)}>
+                        <Form onSubmit={(e) => this.handleLogin(e)}>
                             <FormGroup>
                                 <Label for="loginEmail" className="mb-2">Email</Label>
                                 <Input 
@@ -151,7 +156,7 @@ class Header extends Component {
                 <Modal isOpen={this.state.isRegisterModalOpen} toggle={this.toggleRegisterModal} >
                     <ModalHeader toggle={this.toggleRegisterModal}>Register</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={(e) => this.submitRegister(e)}>
+                        <Form onSubmit={(e) => this.handleRegister(e)}>
                             <FormGroup>
                                 <Label for="registerEmail" className="mb-2">Email</Label>
                                 <Input 
