@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { Button, Form, FormGroup, FormFeedback, Label, Input, FormText,
 Container, Row, Col } from 'reactstrap';
-import './SellSomethingComponent.css'
+import './SellSomethingComponent.css';
+import {ImageUpload} from './ImageUploadComponent';
 
 class SellSomething extends Component {
     constructor(props) {
@@ -76,6 +77,9 @@ class SellSomething extends Component {
                             SellerEmail:this.state.SellerEmail})
     }
 
+
+
+
     render() {
         return (
             <Container>
@@ -97,7 +101,6 @@ class SellSomething extends Component {
                             }}
                             type="text" name="ItemName" id="ItemName" 
                             placeholder="..." bsSize="lg" className="mt-3" 
-                            required
                             valid={this.state.validate.ItemNameState === "passed"}
                             invalid={this.state.validate.ItemNameState === "not passed"}
                             />
@@ -116,7 +119,7 @@ class SellSomething extends Component {
                             this.validateType1(e);
                         }}
                         type="select" name="ItemType1" id="ItemType1" 
-                        bsSize="lg" className="mt-5" required
+                        bsSize="lg" className="mt-5" 
                         valid={this.state.validate.ItemType1State === "passed"}
                         invalid={this.state.validate.ItemType1State === "not passed"}
                         >
@@ -168,7 +171,7 @@ class SellSomething extends Component {
                             }}
                             type="textarea" name="ItemDescription" 
                             id="ItemDescription" bsSize="lg"  
-                            rows={6} className="mt-5" required
+                            rows={6} className="mt-5" 
                             valid = {this.state.validate.ItemDescriptionState==="passed"}
                             invalid = {this.state.validate.ItemDescriptionState==="not passed"}/>
                             <FormFeedback>Description needs to have more than 20 characters</FormFeedback>
@@ -176,19 +179,16 @@ class SellSomething extends Component {
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="ItemImages" xs={{offset: 1, size: 2}} size="lg" className="mt-5">Item Images</Label>
-                        <Col  xs={8}>
-                        <Input type="file" name="ItemImages" id="ItemImages" bsSize="lg" className="mt-5" multiple/>
+                        <Label xs={{offset: 1, size: 2}} size="lg" className="mt-4">Item Images</Label>
+                        <Col  className="mt-5">
+                            <ImageUpload  uploadImages={this.props.uploadImages}/>
+                            <FormText>Upload at least one and at most six images</FormText>
                         </Col>
-                        {/* <FormText color="muted">
-                        This is some placeholder block-level help text for the above input.
-                        It's a bit lighter and easily wraps to a new line.
-                        </FormText> */}
                     </FormGroup>
             
 
                     <FormGroup row>
-                        <Col xs={{offset: 6}}>
+                        <Col xs={{offset: 6}} className="mt-5">
                             <Button 
                             disabled ={this.state.validate.ItemDescriptionState != "passed" ||
                                         this.state.validate.ItemNameState != "passed" ||

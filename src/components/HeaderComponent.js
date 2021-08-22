@@ -211,6 +211,7 @@ class Header extends Component {
                                 <Label for="registerPassword" className="mb-2">Password</Label>
                                 <Input 
                                 onBlur={(e) => {
+                                    console.log(e);
                                     this.handleChange(e);
                                     this.validatePassword(e);
                                 }}

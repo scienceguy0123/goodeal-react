@@ -187,6 +187,12 @@ export const addItem = (info) => ({
 });
 
 export const itemFailed = (errMess) => ({
-    trpe: ActionTypes.ITEM_FAILED,
+    type: ActionTypes.ITEM_FAILED,
     payload: errMess
+})
+
+
+export const uploadImages = (images) => ({
+    type: ActionTypes.UPLOAD_IMAGE,
+    payload: images
 })

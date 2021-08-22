@@ -9,3 +9,4 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 export const ADD_ITEM = 'ADD_ITEM';
 export const ITEM_FAILED = 'ITEM_FAILED';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';

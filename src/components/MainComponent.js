@@ -4,13 +4,15 @@ import Home from './HomeComponent.js';
 import SellSomething from './SellSomethingComponent.js';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser , registerUser, logoutUser, postItem} from '../redux/actionCreators.js';
+import { loginUser , registerUser, logoutUser, postItem, uploadImages} from '../redux/actionCreators.js';
+import { UploadImage } from '../redux/uploadImages.js';
 
 const mapStateToProps = state => {
     return {
         auth: state.auth,
         register: state.register ,
-        item:state.item
+        item:state.item,
+        uploadImages: state.uploadImages
     }
 }
 
@@ -18,7 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
     loginUser: (creds) => dispatch(loginUser(creds)),
     registerUser: (creds) => dispatch(registerUser(creds)),
     logoutUser: () => dispatch(logoutUser()),
-    postItem: (info) => dispatch(postItem(info))
+    postItem: (info) => dispatch(postItem(info)),
+    uploadImages: (images) => dispatch(uploadImages(images))
 });
 
 class Main extends Component{
@@ -57,6 +60,7 @@ class Main extends Component{
                     <Route path='/home' component={HomePage}/>
                     <Route path='/sellsomething' component={() => <SellSomething
                                                                     postItem={this.props.postItem}
+                                                                    uploadImages={this.props.uploadImages}
                                                                     auth={this.props.auth}/>}/>
                     <Route exact path='/all' />
                     <Route exact path='/clothes' />
