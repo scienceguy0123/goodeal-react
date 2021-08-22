@@ -149,3 +149,44 @@ export const logoutUser = () => (dispatch) => {
     localStorage.removeItem('creds');
     dispatch(receiveLogout())
 }
+
+
+export const postItem = (info) => (dispatch) => {
+    return fetch(baseUrl + 'items', {
+        method: 'POST',
+        body: JSON.stringify(info),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+
+        }, error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(info => dispatch(addItem(info)))
+        .catch(error => {
+            dispatch(itemFailed(error.message));
+            alert('Your item could not be posted \nError: ' + error.message); })
+}
+
+export const addItem = (info) => ({
+    type: ActionTypes.ADD_ITEM,
+    payload: info
+});
+
+export const itemFailed = (errMess) => ({
+    trpe: ActionTypes.ITEM_FAILED,
+    payload: errMess
+})

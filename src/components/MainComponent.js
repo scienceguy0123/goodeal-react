@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
 import Header from './HeaderComponent.js';
 import Home from './HomeComponent.js';
+import SellSomething from './SellSomethingComponent.js';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser , registerUser, logoutUser} from '../redux/actionCreators.js';
+import { loginUser , registerUser, logoutUser, postItem} from '../redux/actionCreators.js';
 
 const mapStateToProps = state => {
     return {
         auth: state.auth,
-        register: state.register 
+        register: state.register ,
+        item:state.item
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     loginUser: (creds) => dispatch(loginUser(creds)),
     registerUser: (creds) => dispatch(registerUser(creds)),
-    logoutUser: () => dispatch(logoutUser())
+    logoutUser: () => dispatch(logoutUser()),
+    postItem: (info) => dispatch(postItem(info))
 });
 
 class Main extends Component{
@@ -52,6 +55,9 @@ class Main extends Component{
                     />
                 <Switch>
                     <Route path='/home' component={HomePage}/>
+                    <Route path='/sellsomething' component={() => <SellSomething
+                                                                    postItem={this.props.postItem}
+                                                                    auth={this.props.auth}/>}/>
                     <Route exact path='/all' />
                     <Route exact path='/clothes' />
                     <Route exact path='/shoes' />
@@ -59,6 +65,7 @@ class Main extends Component{
                     <Route exact path='/books' />
                     <Route exact path='/furnitures' />
                     <Route exact path='/stationaries' />
+                    <Route exact path='/services' />
                     <Route exact path='/others' />
                     <Redirect to="/home" />
                 </Switch>

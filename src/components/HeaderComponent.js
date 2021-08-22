@@ -89,7 +89,7 @@ class Header extends Component {
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const {validate} =this.state;
         if (emailRegex.test(e.target.value)) {
-            validate.regEmailState = "passes";
+            validate.regEmailState = "passed";
         }else{
             validate.regEmailState = "not passed";
         }
@@ -142,7 +142,7 @@ class Header extends Component {
                         <Dropdown isOpen={this.state.isDropped} toggle={this.toggleDropdown} className='me-5 pe-5'>
                             <DropdownToggle caret>Menu</DropdownToggle>
                             <DropdownMenu>
-                                <DropdownItem>Sell Something</DropdownItem>
+                                <DropdownItem><Link to='/sellsomething'>Sell Something</Link></DropdownItem>
                                 <DropdownItem>I'm Selling...</DropdownItem>
                                 <DropdownItem onClick={(e)=> this.handleLogout()}>Logout</DropdownItem>
                             </DropdownMenu>
@@ -202,7 +202,7 @@ class Header extends Component {
                                 type="email" 
                                 name="registerEmail" 
                                 id="registerEmail"
-                                valid={this.state.validate.regEmailState === "passes"}
+                                valid={this.state.validate.regEmailState === "passed"}
                                 invalid={this.state.validate.regEmailState === "not passed"} 
                                 className="mb-2"></Input>
                                 <FormFeedback>Email Invalid</FormFeedback>
