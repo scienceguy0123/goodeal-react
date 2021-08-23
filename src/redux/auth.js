@@ -44,12 +44,14 @@ export const Auth = (state = {
                     isLoading: false,
                     isAuthenticated: false,
                     token: '',
-                    user: null
+                    user: null,
+                    errMess:null
                 };
             
             case ActionTypes.LOGOUT_FAILURE:
                 return {...state,
                     isLoading:false,
+                    errMess:action.message
                 };
 
             default:

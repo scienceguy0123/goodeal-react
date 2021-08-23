@@ -5,14 +5,14 @@ import SellSomething from './SellSomethingComponent.js';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser , registerUser, logoutUser, postItem, uploadImages} from '../redux/actionCreators.js';
-import { UploadImage } from '../redux/uploadImages.js';
+
 
 const mapStateToProps = state => {
     return {
         auth: state.auth,
         register: state.register ,
         item:state.item,
-        uploadImages: state.uploadImages
+
     }
 }
 
@@ -31,10 +31,10 @@ class Main extends Component{
     
     componentDidUpdate(prevProps) {
         // Typical usage (don't forget to compare props):
-        if (this.props.register.errMess !== null) {
+        if (this.props.register.errMess !== prevProps.errMess && this.props.register.errMess !== null) {
           alert(this.props.register.errMess);
         }
-        else if (this.props.auth.errMess !== null) {
+        else if (this.props.auth.errMess !== prevProps.errMess && this.props.auth.errMess !== null) {
             alert(this.props.auth.errMess);
         }
       }

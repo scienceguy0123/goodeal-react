@@ -175,19 +175,19 @@ export const postItem = (info) => (dispatch) => {
             throw errmess;
         })
         .then(response => response.json())
-        .then(info => dispatch(addItem(info)))
+        .then(info => dispatch(addPostItem(info)))
         .catch(error => {
-            dispatch(itemFailed(error.message));
+            dispatch(postItemFailed(error.message));
             alert('Your item could not be posted \nError: ' + error.message); })
 }
 
-export const addItem = (info) => ({
-    type: ActionTypes.ADD_ITEM,
+export const addPostItem = (info) => ({
+    type: ActionTypes.ADD_POST_ITEM,
     payload: info
 });
 
-export const itemFailed = (errMess) => ({
-    type: ActionTypes.ITEM_FAILED,
+export const postItemFailed = (errMess) => ({
+    type: ActionTypes.POST_ITEM_FAILED,
     payload: errMess
 })
 

@@ -13,12 +13,13 @@ class SellSomething extends Component {
             ItemType1:'...',
             ItemType2:'',
             ItemDescription:'',
-            SellerEmail:this.props.auth.user.username,
+            SellerEmail:this.props.auth.user ? this.props.auth.user.username : '',
             validate: {
                 ItemNameState:'',
                 ItemType1State:'',
                 ItemDescriptionState:''
-            }
+            },
+            images:[]
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,6 +27,7 @@ class SellSomething extends Component {
         this.validateType1 = this.validateType1.bind(this);
         this.validateDescription = this.validateDescription.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleImages = this.handleImages.bind(this); 
     }
 
         
@@ -70,16 +72,19 @@ class SellSomething extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state.images);
         this.props.postItem({ItemName:this.state.ItemName,
                             ItemType1:this.state.ItemType1,
                             ItemType2:this.state.ItemType2,
                             ItemDescription:this.state.ItemDescription,
-                            SellerEmail:this.state.SellerEmail})
+                            SellerEmail:this.state.SellerEmail,
+                            Images:this.state.images})
     }
 
 
-
-
+    handleImages = (childData) => {
+        this.setState({images:childData})
+    }
     render() {
         return (
             <Container>
@@ -181,7 +186,7 @@ class SellSomething extends Component {
                     <FormGroup row>
                         <Label xs={{offset: 1, size: 2}} size="lg" className="mt-4">Item Images</Label>
                         <Col  className="mt-5">
-                            <ImageUpload  uploadImages={this.props.uploadImages}/>
+                            <ImageUpload  uploadImages={this.props.uploadImages} handleImages={this.handleImages}/>
                             <FormText>Upload at least one and at most six images</FormText>
                         </Col>
                     </FormGroup>
