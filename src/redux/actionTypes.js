@@ -10,3 +10,6 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 export const ADD_POST_ITEM = 'ADD_POST_ITEM';
 export const POST_ITEM_FAILED = 'POST_ITEM_FAILED';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const ADD_ITEMS = 'ADD_ITEMS';
+export const ITEMS_LOADING = 'ITEMS_LOADING';
+export const ITEMS_FAILED = 'ITEMS_FAILED';

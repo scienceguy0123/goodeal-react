@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Button, Form, FormGroup, FormFeedback, Label, Input, FormText,
 Container, Row, Col } from 'reactstrap';
 import './SellSomethingComponent.css';
-import {ImageUpload} from './ImageUploadComponent';
+import ImageUpload from './ImageUploadComponent';
 
 class SellSomething extends Component {
     constructor(props) {
