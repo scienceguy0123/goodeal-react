@@ -4,14 +4,16 @@ import Home from './HomeComponent.js';
 import SellSomething from './SellSomethingComponent.js';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser , registerUser, logoutUser, postItem, uploadImages} from '../redux/actionCreators.js';
+import { loginUser , registerUser, logoutUser, postItem, uploadImages,
+    fetchItems} from '../redux/actionCreators.js';
 
 
 const mapStateToProps = state => {
     return {
         auth: state.auth,
         register: state.register ,
-        item:state.item,
+        postItem:state.postItem,
+        items: state.items
 
     }
 }
@@ -21,12 +23,17 @@ const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
     logoutUser: () => dispatch(logoutUser()),
     postItem: (info) => dispatch(postItem(info)),
-    uploadImages: (images) => dispatch(uploadImages(images))
+    uploadImages: (images) => dispatch(uploadImages(images)),
+    fetchItems: () => dispatch(fetchItems())
 });
 
 class Main extends Component{
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.fetchItems();
     }
     
     componentDidUpdate(prevProps) {

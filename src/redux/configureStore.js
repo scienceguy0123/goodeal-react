@@ -4,6 +4,7 @@ import logger from 'redux-logger';
 import { Auth } from './auth';
 import { Register } from './register';
 import {PostItems} from './postItems';
+import {Items} from './items';
 
 
 export const ConfigureStore = () => {
@@ -11,7 +12,8 @@ export const ConfigureStore = () => {
         combineReducers({
             auth:Auth,
             register:Register,
-            postItems: PostItems
+            postItems: PostItems,
+            items:Items
 
         }),
         applyMiddleware(thunk, logger)
