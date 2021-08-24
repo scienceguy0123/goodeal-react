@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import SearchBar from './SeachbarComponent.js';
 import Category from './CategoryComponent.js';
 import LatestAdditions from './LatestAdditionsComponent.js';
+import RenderCard from './RenderCardComponent';
 
 class Home extends Component {
     constructor(props) {
@@ -21,7 +22,9 @@ class Home extends Component {
 
 
                 <div className="lastestAddition">
-                    <LatestAdditions />
+                    <LatestAdditions items={this.props.items}/>
+                    
+                   
                 </div>
             </div>
         )

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from './HeaderComponent.js';
 import Home from './HomeComponent.js';
 import SellSomething from './SellSomethingComponent.js';
+import ItemPage from './ItemPageComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser , registerUser, logoutUser, postItem, uploadImages,
@@ -50,7 +51,13 @@ class Main extends Component{
     render() {
     const HomePage = () => {
         return (
-            <Home />
+            <Home items={this.props.items}/>
+        )
+    }
+
+    const ItemWithId = ({match}) => {
+        return(
+            <ItemPage item={this.props.items.items.filter((item) => item._id === match.params.itemId)[0]} />
         )
     }
 
@@ -64,7 +71,7 @@ class Main extends Component{
                     register={this.props.register}
                     />
                 <Switch>
-                    <Route path='/home' component={HomePage}/>
+                    <Route path='/home' component={() => <HomePage/>}/>
                     <Route path='/sellsomething' component={() => <SellSomething
                                                                     postItem={this.props.postItem}
                                                                     uploadImages={this.props.uploadImages}
@@ -76,9 +83,12 @@ class Main extends Component{
                     <Route exact path='/books' />
                     <Route exact path='/furnitures' />
                     <Route exact path='/stationaries' />
+                    <Route exact path='/collectibles' />
                     <Route exact path='/services' />
                     <Route exact path='/others' />
+                    <Route exact path='/items/:itemId' component={ItemWithId} />
                     <Redirect to="/home" />
+                    
                 </Switch>
             </div>
         )

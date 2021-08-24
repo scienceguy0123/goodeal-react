@@ -12,12 +12,14 @@ class SellSomething extends Component {
             ItemName:'',
             ItemType1:'...',
             ItemType2:'',
+            ItemPrice:null,
             ItemDescription:'',
             SellerEmail:this.props.auth.user ? this.props.auth.user.username : '',
             validate: {
                 ItemNameState:'',
                 ItemType1State:'',
-                ItemDescriptionState:''
+                ItemDescriptionState:'',
+                ItemPriceState:''
             },
             images:[]
         }
@@ -28,6 +30,7 @@ class SellSomething extends Component {
         this.validateDescription = this.validateDescription.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleImages = this.handleImages.bind(this); 
+        this.validatePrice = this.validatePrice.bind(this); 
     }
 
         
@@ -70,12 +73,23 @@ class SellSomething extends Component {
         this.setState({validate});
     }
 
+    validatePrice(e) {
+        const {validate} = this.state;
+        if(e.target.value > 0 && e.target.value < 9999) {
+            validate.ItemPriceState = "passed";
+        }else{
+            validate.ItemPriceState = "not passed";
+        }
+        this.setState({validate});
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state.images);
         this.props.postItem({ItemName:this.state.ItemName,
                             ItemType1:this.state.ItemType1,
                             ItemType2:this.state.ItemType2,
+                            ItemPrice:this.state.ItemPrice,
                             ItemDescription:this.state.ItemDescription,
                             SellerEmail:this.state.SellerEmail,
                             Images:this.state.images})
@@ -167,6 +181,24 @@ class SellSomething extends Component {
                     </FormGroup>
 
                     <FormGroup row>
+                        <Label for="ItemPrice" size="lg" xs={{offset: 1, size: 2}} className="mt-5">Item Price</Label>
+                        <Col xs={8}>
+                            <Input 
+                            onChange={(e) => {
+                                this.handleChange(e);
+                                this.validatePrice(e);
+                            }}
+                            type="number" name="ItemPrice" 
+                            id="ItemPrice" bsSize="lg"  
+                            rows={6} className="mt-5" 
+                            valid = {this.state.validate.ItemPriceState==="passed"}
+                            invalid = {this.state.validate.ItemPriceState==="not passed"}/>
+                            <FormFeedback>Unreasonable Price</FormFeedback>
+                            <FormText>Required</FormText>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
                         <Label for="ItemDescription" size="lg" xs={{offset: 1, size: 2}} className="mt-5">Item Description</Label>
                         <Col xs={8}>
                             <Input 
@@ -183,6 +215,7 @@ class SellSomething extends Component {
                             <FormText>Required</FormText>
                         </Col>
                     </FormGroup>
+                    
                     <FormGroup row>
                         <Label xs={{offset: 1, size: 2}} size="lg" className="mt-4">Item Images</Label>
                         <Col  className="mt-5">
