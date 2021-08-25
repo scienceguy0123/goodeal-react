@@ -6,13 +6,22 @@ class ItemPage extends Component {
     constructor(props) {
         super(props);
     }
-1
+    componentDidMount() {
+        
+        this.props.fetchItemId(this.props.match.params.itemId);
+        
+    }
+    
     render() {
+        if(this.props === null || this.props.items.items.length === 0){
+            return null;
+        }
         return(
+            <div>
             <Container fluid>
                 <Row>
-                    <Col xs="12" sm="auto" className="mt-5 ms-5">
-                        <ItemPageCarousel item={this.props.item}
+                    <Col xs="12" sm="6" className="mt-5 ms-5">
+                        <ItemPageCarousel item={this.props.items.items[0]}
                                          />
                         
                     </Col>
@@ -21,7 +30,7 @@ class ItemPage extends Component {
                         <Container>
                             <Row>
                                 <Col xs>
-                                    <h1 className="title mt-5">{this.props.item.ItemName}</h1>
+                                    <h1 className="title mt-5">{this.props.items.items[0].ItemName}</h1>
                                 </Col>
                             </Row>
 
@@ -31,7 +40,7 @@ class ItemPage extends Component {
                                     
                                 </Col>
                                 <Col>
-                                    <h2 id="price" className="text-danger mt-5 content">{`$ ${this.props.item.ItemPrice}`}</h2>
+                                    <h2 id="price" className="text-danger mt-5 content">{`$ ${this.props.items.items[0].ItemPrice}`}</h2>
                                 </Col>
                             </Row>
 
@@ -41,7 +50,7 @@ class ItemPage extends Component {
                                     
                                 </Col>
                                 <Col xs>
-                                    <h2 className="mt-5 content" id="category" >{`${this.props.item.ItemType1} , ${this.props.item.ItemType2}`}</h2>
+                                    <h2 className="mt-5 content" id="category" >{`${this.props.items.items[0].ItemType1} , ${this.props.items.items[0].ItemType2}`}</h2>
                                 </Col>
                             </Row>
 
@@ -52,7 +61,7 @@ class ItemPage extends Component {
                                     
                                 </Col>
                                 <Col>
-                                    <h2 className="mt-5 content" id="price" >{` ${this.props.item.createdAt.slice(0, 10)}`}</h2>
+                                    <h2 className="mt-5 content" id="price" >{` ${this.props.items.items[0].createdAt.slice(0, 10)}`}</h2>
                                 </Col>
                             </Row>
 
@@ -62,7 +71,7 @@ class ItemPage extends Component {
                                     
                                 </Col>
                                 <Col>
-                                    <h2 className="mt-5 content" id="price" ><a href={`mailto:${this.props.item.SellerEmail}`}>{this.props.item.SellerEmail}</a></h2>
+                                    <h2 className="mt-5 content" id="price" ><a href={`mailto:${this.props.items.items[0].SellerEmail}`}>{this.props.items.items[0].SellerEmail}</a></h2>
                                 </Col>
                             </Row>
 
@@ -77,11 +86,12 @@ class ItemPage extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        <h3 className="mt-5 ms-5 content">{this.props.item.ItemDescription}</h3>
+                        <h3 className="mt-5 ms-5 content">{this.props.items.items[0].ItemDescription}</h3>
                     </Col>
                 </Row>
                 
             </Container>
+        </div>
         )
     }
 }

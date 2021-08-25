@@ -4,14 +4,14 @@ export const Items = (state = {
         isLoading: true,
         errMess: null,
         items: [],
-        readyRequest: true
+        
     }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_ITEMS:
-            return {...state, isLoading: false, errMess: null, items: action.payload, readyRequest:true};
+            return {...state, isLoading: false, errMess: null, items: state.items.concat(action.payload)};
 
         case ActionTypes.ITEMS_LOADING:
-            return {...state, isLoading: true, errMess: null, items: [], readyRequest:false};
+            return {...state, isLoading: true, errMess: null, items: []};
 
         case ActionTypes.ITEMS_FAILED:
             return {...state, isLoading: false, errMess: action.payload, items: []};

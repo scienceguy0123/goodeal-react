@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-
+import RenderCard from './RenderCardComponent';
+import {Container, Row, Col} from 'reactstrap';
 class CategoryItems extends Component {
     constructor(props) {
         super(props);
@@ -8,7 +9,7 @@ class CategoryItems extends Component {
     
     componentDidMount() {
         
-        this.props.fetchCategoryItem('clothes');
+        this.props.fetchCategoryItem(this.props.match.params.category);
         
     }
     
@@ -16,12 +17,16 @@ class CategoryItems extends Component {
     
 
     render() {
-        // const { category } = this.props.match.params;
-
         return(
-            <div>
-                <h1>{this.props.match.params.category}</h1>
-            </div>
+            <Container>
+                <Row>
+                    {this.props.items.items.map((item) => (
+                        <Col xs={{size:3}}>
+                            <RenderCard item={item}/>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
         )
     }
 }

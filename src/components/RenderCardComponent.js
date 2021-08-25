@@ -14,7 +14,7 @@ class RenderCard extends Component {
         return(
             <div>
                 <Card>
-                    <Link to={`/items/${this.props.item._id}`} style={{ color:'inherit', textDecoration: 'none' }}>
+                    <Link to={`/item/${this.props.item._id}`} style={{ color:'inherit', textDecoration: 'none' }}>
                     
                         {/* <CardImg top height="40%" width="100%" src={this.props.item.Images[0]} alt="Card image cap" /> */}
                         <div className='addition-img'>

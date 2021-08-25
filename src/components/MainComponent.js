@@ -7,7 +7,7 @@ import CategoryItems from './CategoryItemsComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser , registerUser, logoutUser, postItem, uploadImages,
-    fetchItems, fetchCategoryItem} from '../redux/actionCreators.js';
+    fetchItems, fetchCategoryItem, fetchItemId} from '../redux/actionCreators.js';
 
 
 const mapStateToProps = state => {
@@ -27,7 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
     postItem: (info) => dispatch(postItem(info)),
     uploadImages: (images) => dispatch(uploadImages(images)),
     fetchItems: () => dispatch(fetchItems()),
-    fetchCategoryItem: (category) => dispatch(fetchCategoryItem(category))
+    fetchCategoryItem: (category) => dispatch(fetchCategoryItem(category)),
+    fetchItemId:(itemId) => dispatch(fetchItemId(itemId))
 });
 
 class Main extends Component{
@@ -52,13 +53,17 @@ class Main extends Component{
     const HomePage = () => {
         return (
             <Home items={this.props.items}
-                fetchItems={this.props.fetchItems}/>
+                fetchItems={this.props.fetchItems}
+                />
         )
     }
 
     const ItemWithId = ({match}) => {
         return(
-            <ItemPage item={this.props.items.items.filter((item) => item._id === match.params.itemId)[0]} />
+            <ItemPage   fetchItemId={this.props.fetchItemId}
+                        match={match} 
+                        items={this.props.items}
+                        />
         )
     }
 
@@ -88,17 +93,9 @@ class Main extends Component{
                                                                     postItem={this.props.postItem}
                                                                     uploadImages={this.props.uploadImages}
                                                                     auth={this.props.auth}/>}/>
-                    {/* <Route exact path='/items/all' /> */}
                     <Route  exact path='/items/:category' render={CategoryItemsPage} />
-                    {/* <Route exact path='/items/shoes' />
-                    <Route exact path='/items/eletronics' />
-                    <Route exact path='/items/books' />
-                    <Route exact path='/items/furnitures' />
-                    <Route exact path='/items/stationaries' />
-                    <Route exact path='/items/collectibles' />
-                    <Route exact path='/items/services' />
-                    <Route exact path='/items/others' /> */}
-                    {/* <Route exact path='/items/:itemId' component={ItemWithId} /> */}
+
+                    <Route exact path='/item/:itemId' render={ItemWithId} />
                     <Redirect to="/home" />
                     
                 </Switch>
