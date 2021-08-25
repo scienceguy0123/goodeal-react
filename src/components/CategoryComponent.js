@@ -13,36 +13,36 @@ class Category extends Component {
             <Container fluid>
                 <Row >
                     <Col xs={{offset:1, size:2 }}>
-                    <Link to='/all'><ListGroupItem tag="a" id="all">ALL</ListGroupItem></Link>
+                    <Link to='/items/all'><ListGroupItem tag="a" id="all">ALL</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}>
-                        <Link to='/clothes'><ListGroupItem tag="a" id="clothes" >CLOTHES</ListGroupItem></Link>
+                        <Link to='/items/clothes'><ListGroupItem tag="a" id="clothes" >CLOTHES</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}> 
-                        <Link to='/shoes'><ListGroupItem tag="a" id="shoes" >SHOES</ListGroupItem></Link>
+                        <Link to='/items/shoes'><ListGroupItem tag="a" id="shoes" >SHOES</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}>
-                        <Link to='/eletronics'><ListGroupItem tag="a" id="eletronics" >ELETRONICS</ListGroupItem></Link>
+                        <Link to='/items/eletronics'><ListGroupItem tag="a" id="eletronics" >ELETRONICS</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}>
-                        <Link to='/books'><ListGroupItem tag="a" id="books" >BOOKS2</ListGroupItem></Link>
+                        <Link to='/items/books'><ListGroupItem tag="a" id="books" >BOOKS2</ListGroupItem></Link>
                     </Col>
                 </Row>
                 <Row className="mt-5">
                     <Col xs={{offset:1, size:2 }}>
-                        <Link to='/furnitures'><ListGroupItem tag="a" id="furnitures" href="#">FURNITURES</ListGroupItem></Link>
+                        <Link to='/items/furnitures'><ListGroupItem tag="a" id="furnitures" href="#">FURNITURES</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}>
-                        <Link to='/stationaries'><ListGroupItem tag="a" id="stationaries" href="#">STATIONARIES</ListGroupItem></Link>
+                        <Link to='/items/stationaries'><ListGroupItem tag="a" id="stationaries" href="#">STATIONARIES</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}> 
-                        <Link to='/collectibles'><ListGroupItem tag="a" id="collectibles" href="#">COLLECTIBLES</ListGroupItem></Link>
+                        <Link to='/items/collectibles'><ListGroupItem tag="a" id="collectibles" href="#">COLLECTIBLES</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}>
-                        <Link to='/services'><ListGroupItem tag="a" id="services" href="#">SERVICES</ListGroupItem></Link>
+                        <Link to='/items/services'><ListGroupItem tag="a" id="services" href="#">SERVICES</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}>
-                        <Link to='/others'><ListGroupItem tag="a" id="others" href="#">OTHERS</ListGroupItem></Link>
+                        <Link to='/items/others'><ListGroupItem tag="a" id="others" href="#">OTHERS</ListGroupItem></Link>
                     </Col>
                 </Row>
             </Container>

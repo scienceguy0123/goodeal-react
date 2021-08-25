@@ -3,10 +3,11 @@ import Header from './HeaderComponent.js';
 import Home from './HomeComponent.js';
 import SellSomething from './SellSomethingComponent.js';
 import ItemPage from './ItemPageComponent';
+import CategoryItems from './CategoryItemsComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser , registerUser, logoutUser, postItem, uploadImages,
-    fetchItems} from '../redux/actionCreators.js';
+    fetchItems, fetchCategoryItem} from '../redux/actionCreators.js';
 
 
 const mapStateToProps = state => {
@@ -25,7 +26,8 @@ const mapDispatchToProps = (dispatch) => ({
     logoutUser: () => dispatch(logoutUser()),
     postItem: (info) => dispatch(postItem(info)),
     uploadImages: (images) => dispatch(uploadImages(images)),
-    fetchItems: () => dispatch(fetchItems())
+    fetchItems: () => dispatch(fetchItems()),
+    fetchCategoryItem: (category) => dispatch(fetchCategoryItem(category))
 });
 
 class Main extends Component{
@@ -33,9 +35,7 @@ class Main extends Component{
         super(props);
     }
 
-    componentDidMount() {
-        this.props.fetchItems();
-    }
+   
     
     componentDidUpdate(prevProps) {
         // Typical usage (don't forget to compare props):
@@ -51,7 +51,8 @@ class Main extends Component{
     render() {
     const HomePage = () => {
         return (
-            <Home items={this.props.items}/>
+            <Home items={this.props.items}
+                fetchItems={this.props.fetchItems}/>
         )
     }
 
@@ -60,6 +61,17 @@ class Main extends Component{
             <ItemPage item={this.props.items.items.filter((item) => item._id === match.params.itemId)[0]} />
         )
     }
+
+    const CategoryItemsPage = ({match}) => {
+
+        return(
+            <CategoryItems fetchCategoryItem={this.props.fetchCategoryItem}
+                            match={match}
+                            items={this.props.items}/>
+        )
+    }
+    const params = this.props.match.params;
+
 
         return(
             <div>
@@ -71,25 +83,26 @@ class Main extends Component{
                     register={this.props.register}
                     />
                 <Switch>
-                    <Route path='/home' component={() => <HomePage/>}/>
+                    <Route path='/home' render={HomePage}/>
                     <Route path='/sellsomething' component={() => <SellSomething
                                                                     postItem={this.props.postItem}
                                                                     uploadImages={this.props.uploadImages}
                                                                     auth={this.props.auth}/>}/>
-                    <Route exact path='/all' />
-                    <Route exact path='/clothes' />
-                    <Route exact path='/shoes' />
-                    <Route exact path='/eletronics' />
-                    <Route exact path='/books' />
-                    <Route exact path='/furnitures' />
-                    <Route exact path='/stationaries' />
-                    <Route exact path='/collectibles' />
-                    <Route exact path='/services' />
-                    <Route exact path='/others' />
-                    <Route exact path='/items/:itemId' component={ItemWithId} />
+                    {/* <Route exact path='/items/all' /> */}
+                    <Route  exact path='/items/:category' render={CategoryItemsPage} />
+                    {/* <Route exact path='/items/shoes' />
+                    <Route exact path='/items/eletronics' />
+                    <Route exact path='/items/books' />
+                    <Route exact path='/items/furnitures' />
+                    <Route exact path='/items/stationaries' />
+                    <Route exact path='/items/collectibles' />
+                    <Route exact path='/items/services' />
+                    <Route exact path='/items/others' /> */}
+                    {/* <Route exact path='/items/:itemId' component={ItemWithId} /> */}
                     <Redirect to="/home" />
                     
                 </Switch>
+                
             </div>
         )
     }

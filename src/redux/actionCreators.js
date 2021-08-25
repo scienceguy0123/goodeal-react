@@ -220,6 +220,29 @@ export const fetchItems = () => (dispatch) => {
     .catch(error => dispatch(itemsFailed(error.message)));
 };
 
+export const fetchCategoryItem = (category) => (dispatch) => {
+    dispatch(itemsLoading());
+
+    return fetch(baseUrl + 'items/' + category)
+    .then(response => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(items => dispatch(addItems(items)))
+    .catch(error => dispatch(itemsFailed(error.message)));
+};
+
 export const itemsLoading = () => ({
     type: ActionTypes.ITEMS_LOADING
 });

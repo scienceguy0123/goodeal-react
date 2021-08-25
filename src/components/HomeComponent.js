@@ -9,6 +9,12 @@ class Home extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        
+        this.props.fetchItems();
+        
+    }
+
     render() {
         return (
             <div>

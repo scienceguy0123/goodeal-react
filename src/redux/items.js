@@ -3,14 +3,15 @@ import * as ActionTypes from './actionTypes';
 export const Items = (state = {
         isLoading: true,
         errMess: null,
-        items: []
+        items: [],
+        readyRequest: true
     }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_ITEMS:
-            return {...state, isLoading: false, errMess: null, items: action.payload};
+            return {...state, isLoading: false, errMess: null, items: action.payload, readyRequest:true};
 
         case ActionTypes.ITEMS_LOADING:
-            return {...state, isLoading: true, errMess: null, items: []};
+            return {...state, isLoading: true, errMess: null, items: [], readyRequest:false};
 
         case ActionTypes.ITEMS_FAILED:
             return {...state, isLoading: false, errMess: action.payload, items: []};
