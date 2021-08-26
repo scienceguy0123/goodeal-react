@@ -60,7 +60,7 @@ class ImageUpload extends Component {
         {this.state.newImages.map((image, index) => (
           <div key={index}>
             <img src={image} alt="" width="100"></img>
-            <button onClick={(e) => {this.onImageRemove(index)}}>Remove</button>
+            <button type="button" onClick={(e) => {this.onImageRemove(index)}}>Remove</button>
           </div>
         ))}
       </div>

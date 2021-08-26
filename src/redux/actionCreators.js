@@ -181,6 +181,33 @@ export const postItem = (info) => (dispatch) => {
             alert('Your item could not be posted \nError: ' + error.message); })
 }
 
+export const deleteItem = (itemId) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'items/' + itemId, {
+        method: "DELETE",
+        headers: {
+          'Authorization': bearer
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(item => { console.log(' Deleted',item) })
+    .catch(error => dispatch(itemsFailed(error.message)));
+}
+
 export const addPostItem = (info) => ({
     type: ActionTypes.ADD_POST_ITEM,
     payload: info
@@ -201,6 +228,29 @@ export const fetchItems = () => (dispatch) => {
     dispatch(itemsLoading());
 
     return fetch(baseUrl + 'items')
+    .then(response => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(items => dispatch(addItems(items)))
+    .catch(error => dispatch(itemsFailed(error.message)));
+};
+
+export const fetchLatestItems = () => (dispatch) => {
+    dispatch(itemsLoading());
+
+    return fetch(baseUrl + 'items/latest')
     .then(response => {
         if (response.ok) {
             return response;
@@ -265,6 +315,54 @@ export const fetchItemId = (ItemId) => (dispatch) => {
     .then(items => dispatch(addItems(items)))
     .catch(error => dispatch(itemsFailed(error.message)));
 };
+
+export const fetchUserItems = (email) => (dispatch) => {
+    dispatch(itemsLoading());
+
+    return fetch(baseUrl + 'items/email/' + email)
+    .then(response => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(items => dispatch(addItems(items)))
+    .catch(error => dispatch(itemsFailed(error.message)));
+};
+
+export const fetchNameItems = (keyword) => (dispatch) => {
+    dispatch(itemsLoading());
+
+    return fetch(baseUrl + 'items/name/' + keyword)
+    .then(response => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    },
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    .then(items => dispatch(addItems(items)))
+    .catch(error => dispatch(itemsFailed(error.message)));
+}
+
+
 
 export const itemsLoading = () => ({
     type: ActionTypes.ITEMS_LOADING

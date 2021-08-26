@@ -3,11 +3,14 @@ import Header from './HeaderComponent.js';
 import Home from './HomeComponent.js';
 import SellSomething from './SellSomethingComponent.js';
 import ItemPage from './ItemPageComponent';
-import CategoryItems from './CategoryItemsComponent'
+import CategoryItems from './CategoryItemsComponent';
+import UserSellingPage from './UserSellingPage';
+import SearchNameItems from './SearchNameItemsComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginUser , registerUser, logoutUser, postItem, uploadImages,
-    fetchItems, fetchCategoryItem, fetchItemId} from '../redux/actionCreators.js';
+    fetchItems, fetchCategoryItem, fetchItemId, fetchUserItems, deleteItem,
+    fetchNameItems, fetchLatestItems} from '../redux/actionCreators.js';
 
 
 const mapStateToProps = state => {
@@ -28,7 +31,11 @@ const mapDispatchToProps = (dispatch) => ({
     uploadImages: (images) => dispatch(uploadImages(images)),
     fetchItems: () => dispatch(fetchItems()),
     fetchCategoryItem: (category) => dispatch(fetchCategoryItem(category)),
-    fetchItemId:(itemId) => dispatch(fetchItemId(itemId))
+    fetchItemId:(itemId) => dispatch(fetchItemId(itemId)),
+    fetchUserItems: (email) => dispatch(fetchUserItems(email)),
+    deleteItem: (itemId) => dispatch(deleteItem(itemId)),
+    fetchNameItems: (keyWord) => dispatch(fetchNameItems(keyWord)),
+    fetchLatestItems: () => dispatch(fetchLatestItems())
 });
 
 class Main extends Component{
@@ -53,7 +60,8 @@ class Main extends Component{
     const HomePage = () => {
         return (
             <Home items={this.props.items}
-                fetchItems={this.props.fetchItems}
+                fetchLatestItems={this.props.fetchLatestItems}
+                fetchNameItems={this.props.fetchNameItems}
                 />
         )
     }
@@ -75,7 +83,14 @@ class Main extends Component{
                             items={this.props.items}/>
         )
     }
-    const params = this.props.match.params;
+
+    const searchNameItemsPage = ({match}) => {
+        return(
+            <SearchNameItems fetchNameItems={this.props.fetchNameItems}
+                            match={match}
+                            items={this.props.items} />
+        )
+    }
 
 
         return(
@@ -89,12 +104,19 @@ class Main extends Component{
                     />
                 <Switch>
                     <Route path='/home' render={HomePage}/>
-                    <Route path='/sellsomething' component={() => <SellSomething
+                    <Route path='/user/sellsomething' component={() => <SellSomething
                                                                     postItem={this.props.postItem}
                                                                     uploadImages={this.props.uploadImages}
                                                                     auth={this.props.auth}/>}/>
+                    
+                    <Route exact path='/user/selling' render={() => <UserSellingPage
+                                                                    fetchUserItems={this.props.fetchUserItems}
+                                                                    auth={this.props.auth}
+                                                                    items={this.props.items}
+                                                                    deleteItem={this.props.deleteItem} /> }/>
+                    
                     <Route  exact path='/items/:category' render={CategoryItemsPage} />
-
+                    <Route exact path='/items/name/:keyword' render={searchNameItemsPage} />
                     <Route exact path='/item/:itemId' render={ItemWithId} />
                     <Redirect to="/home" />
                     

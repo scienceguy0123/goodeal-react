@@ -9,17 +9,15 @@ class Home extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        
-        this.props.fetchItems();
-        
+    componentDidMount() {       
+        this.props.fetchLatestItems();    
     }
 
     render() {
         return (
             <div>
                 <div className="searchbar">
-                    <SearchBar />
+                    <SearchBar fetchNameItems={this.props.fetchNameItems}/>
                 </div>
 
                 <div className="category">
