@@ -59,7 +59,8 @@ class Header extends Component {
         event.preventDefault();
         this.toggleLoginModal();
         this.props.loginUser({username: this.state.loginEmail, password: this.state.loginPassword});
-        alert(JSON.stringify(this.state));
+        // alert(JSON.stringify(this.state));
+
         
     }
 

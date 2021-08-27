@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Label } from 'reactstrap';
+import { Container, Row, Col,  } from 'reactstrap';
 import {ItemPageCarousel} from './ItemPageCarousel';
+import {  Redirect } from 'react-router-dom';
+
 import './ItemPageComponent.css'
 class ItemPage extends Component {
     constructor(props) {
@@ -11,11 +13,25 @@ class ItemPage extends Component {
         this.props.fetchItemId(this.props.match.params.itemId);
         
     }
+
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.auth.isAuthenticated === true &&  prevProps.auth.isAuthenticated === false) {
+            this.props.fetchItemId(this.props.match.params.itemId);
+        }
+      }
+
     
     render() {
+        if (!this.props.auth.isAuthenticated) {
+            return( 
+            <h1> Please Login first</h1>
+            )
+        }
         if(this.props === null || this.props.items.items.length === 0){
             return null;
         }
+
         return(
             <div>
             <Container fluid>

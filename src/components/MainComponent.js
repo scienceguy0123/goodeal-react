@@ -41,36 +41,43 @@ const mapDispatchToProps = (dispatch) => ({
 class Main extends Component{
     constructor(props) {
         super(props);
+
+        this.state={
+            showAlert: false
+
+        }
     }
 
-   
+
     
-    componentDidUpdate(prevProps) {
-        // Typical usage (don't forget to compare props):
-        if (this.props.register.errMess !== prevProps.errMess && this.props.register.errMess !== null) {
-          alert(this.props.register.errMess);
-        }
-        else if (this.props.auth.errMess !== prevProps.errMess && this.props.auth.errMess !== null) {
-            alert(this.props.auth.errMess);
-        }
-      }
+    // componentDidUpdate(prevProps) {
+    //     // Typical usage (don't forget to compare props):
+    //     if (this.props.register.errMess !== prevProps.errMess && this.props.register.errMess !== null) {
+    //       alert(this.props.register.errMess);
+    //     }
+    //     else if (this.props.auth.errMess !== prevProps.errMess && this.props.auth.errMess !== null) {
+            
+    //         alert('Username or password incorrect');
+    //     }
+    //   }
 
 
     render() {
-    const HomePage = () => {
-        return (
-            <Home items={this.props.items}
-                fetchLatestItems={this.props.fetchLatestItems}
-                fetchNameItems={this.props.fetchNameItems}
-                />
-        )
-    }
+    // const HomePage = () => {
+    //     return (
+    //         <Home items={this.props.items}
+    //             fetchLatestItems={this.props.fetchLatestItems}
+    //             fetchNameItems={this.props.fetchNameItems}
+    //             />
+    //     )
+    // }
 
     const ItemWithId = ({match}) => {
         return(
             <ItemPage   fetchItemId={this.props.fetchItemId}
                         match={match} 
                         items={this.props.items}
+                        auth={this.props.auth}
                         />
         )
     }
@@ -80,7 +87,8 @@ class Main extends Component{
         return(
             <CategoryItems fetchCategoryItem={this.props.fetchCategoryItem}
                             match={match}
-                            items={this.props.items}/>
+                            items={this.props.items}
+                            auth={this.props.auth}/>
         )
     }
 
@@ -88,12 +96,14 @@ class Main extends Component{
         return(
             <SearchNameItems fetchNameItems={this.props.fetchNameItems}
                             match={match}
-                            items={this.props.items} />
+                            items={this.props.items} 
+                            auth={this.props.auth}/>
         )
     }
 
 
         return(
+            
             <div>
                 <Header 
                     loginUser={this.props.loginUser}
@@ -102,8 +112,12 @@ class Main extends Component{
                     auth={this.props.auth}
                     register={this.props.register}
                     />
+
                 <Switch>
-                    <Route path='/home' render={HomePage}/>
+                    <Route path='/home' render={(props) =>  <Home items={this.props.items}
+                                                            fetchLatestItems={this.props.fetchLatestItems}
+                                                            fetchNameItems={this.props.fetchNameItems}
+                                                             {...props}           />}/>
                     <Route path='/user/sellsomething' component={() => <SellSomething
                                                                     postItem={this.props.postItem}
                                                                     uploadImages={this.props.uploadImages}

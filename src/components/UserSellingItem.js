@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Media, Container, Row, Col, Button} from 'reactstrap';
 import { Link } from 'react-router-dom'; 
+import { Redirect } from 'react-router-dom';
+
 class UserSellingItem extends Component {
     constructor(props){
         super(props);
@@ -21,6 +23,7 @@ class UserSellingItem extends Component {
     }
 
     render() {
+
         return(
             
                 <Row className="mt-5" >

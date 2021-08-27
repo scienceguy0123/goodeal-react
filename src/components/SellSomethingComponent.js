@@ -3,6 +3,8 @@ import { Button, Form, FormGroup, FormFeedback, Label, Input, FormText,
 Container, Row, Col } from 'reactstrap';
 import './SellSomethingComponent.css';
 import ImageUpload from './ImageUploadComponent';
+import { Redirect } from 'react-router-dom';
+
 
 class SellSomething extends Component {
     constructor(props) {
@@ -100,6 +102,10 @@ class SellSomething extends Component {
         this.setState({images:childData})
     }
     render() {
+        if (!this.props.auth.isAuthenticated) {
+            return(
+            <h1> Please Login first</h1>
+            )}
         return (
             <Container>
                 <Row>

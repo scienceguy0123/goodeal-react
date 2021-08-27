@@ -25,7 +25,7 @@ class Category extends Component {
                         <Link to='/items/eletronics'><ListGroupItem tag="a" id="eletronics" >ELETRONICS</ListGroupItem></Link>
                     </Col>
                     <Col xs={{ size:2 }}>
-                        <Link to='/items/books'><ListGroupItem tag="a" id="books" >BOOKS2</ListGroupItem></Link>
+                        <Link to='/items/books'><ListGroupItem tag="a" id="books" >BOOKS</ListGroupItem></Link>
                     </Col>
                 </Row>
                 <Row className="mt-5">

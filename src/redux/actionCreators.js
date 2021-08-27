@@ -272,8 +272,17 @@ export const fetchLatestItems = () => (dispatch) => {
 
 export const fetchCategoryItem = (category) => (dispatch) => {
     dispatch(itemsLoading());
+    
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'items/' + category)
+    return fetch(baseUrl + 'items/' + category, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': bearer
+        },
+        credentials: "same-origin"
+    })
     .then(response => {
         if (response.ok) {
             return response;
@@ -296,7 +305,17 @@ export const fetchCategoryItem = (category) => (dispatch) => {
 export const fetchItemId = (ItemId) => (dispatch) => {
     dispatch(itemsLoading());
 
-    return fetch(baseUrl + 'items/' + ItemId)
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+
+    return fetch(baseUrl + 'items/' + ItemId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': bearer
+        },
+        credentials: "same-origin"
+    })
     .then(response => {
         if (response.ok) {
             return response;
@@ -318,8 +337,16 @@ export const fetchItemId = (ItemId) => (dispatch) => {
 
 export const fetchUserItems = (email) => (dispatch) => {
     dispatch(itemsLoading());
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'items/email/' + email)
+    return fetch(baseUrl + 'items/email/' + email, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': bearer
+        },
+        credentials: "same-origin"
+    })
     .then(response => {
         if (response.ok) {
             return response;
@@ -341,8 +368,17 @@ export const fetchUserItems = (email) => (dispatch) => {
 
 export const fetchNameItems = (keyword) => (dispatch) => {
     dispatch(itemsLoading());
+    const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'items/name/' + keyword)
+
+    return fetch(baseUrl + 'items/name/' + keyword, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': bearer
+        },
+        credentials: "same-origin"
+    })
     .then(response => {
         if (response.ok) {
             return response;

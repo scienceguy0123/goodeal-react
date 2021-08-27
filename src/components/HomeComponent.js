@@ -7,17 +7,25 @@ import RenderCard from './RenderCardComponent';
 class Home extends Component {
     constructor(props) {
         super(props);
+
+        // this.state={
+        //     showAlert:false,
+            
+        // }
     }
 
     componentDidMount() {       
-        this.props.fetchLatestItems();    
-    }
+        this.props.fetchLatestItems();
+       }    
+    
 
     render() {
         return (
             <div>
+
                 <div className="searchbar">
-                    <SearchBar fetchNameItems={this.props.fetchNameItems}/>
+                    <SearchBar fetchNameItems={this.props.fetchNameItems}
+                                auth={this.props.auth}/>
                 </div>
 
                 <div className="category">
@@ -26,13 +34,15 @@ class Home extends Component {
 
 
                 <div className="lastestAddition">
-                    <LatestAdditions items={this.props.items}/>
+                    <LatestAdditions items={this.props.items}
+                                auth={this.props.auth}/>
                     
                    
                 </div>
             </div>
         )
     }
+
 }
 
 export default Home;

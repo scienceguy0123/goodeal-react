@@ -11,7 +11,20 @@ class UserSellingPage extends Component {
     componentDidMount() {
         this.props.fetchUserItems(this.props.auth.user.username);     
     }
+
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.auth.isAuthenticated === true &&  prevProps.auth.isAuthenticated === false) {
+            this.props.fetchUserItems(this.props.auth.user.username);     
+        }
+      }
+
     render() {
+        if (!this.props.auth.isAuthenticated) {
+            return(
+                <h1> Please Login first</h1>
+            )
+        }
         return(
             <Container>
                
@@ -19,7 +32,7 @@ class UserSellingPage extends Component {
                         
                             <UserSellingItem item={item}
                                             deleteItem={this.props.deleteItem}/>
-                       
+                                            
                     ))}
    
                 
