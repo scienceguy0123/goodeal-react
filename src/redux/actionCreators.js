@@ -37,7 +37,7 @@ export const loginUser = (creds) => (dispatch) => {
         }
         else {
             console.log(response);
-            var error = new Error('Error ' + response.err.message);
+            var error = new Error('Error : ' + response.status);
             error.response = response;
             throw error;
         }

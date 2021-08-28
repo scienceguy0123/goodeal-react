@@ -50,16 +50,17 @@ class Main extends Component{
 
 
     
-    // componentDidUpdate(prevProps) {
-    //     // Typical usage (don't forget to compare props):
-    //     if (this.props.register.errMess !== prevProps.errMess && this.props.register.errMess !== null) {
-    //       alert(this.props.register.errMess);
-    //     }
-    //     else if (this.props.auth.errMess !== prevProps.errMess && this.props.auth.errMess !== null) {
-            
-    //         alert('Username or password incorrect');
-    //     }
-    //   }
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.register.isRegistered && this.props.register.isRegistered !== prevProps.register.isRegistered 
+            && prevProps.register.isRegistered === false) {
+          alert('Thank you for registering, please check the validation email just sent. It could be in spam.');
+        }
+        if (!this.props.auth.isAuthenticated && this.props.auth.errMess !== prevProps.auth.errMess 
+            && this.props.auth.errMess !== null) {
+          alert(this.props.auth.errMess + 'please check the validation email in your. It could be in spam.');
+        }
+      }
 
 
     render() {
