@@ -5,7 +5,7 @@ export const loginUser = (creds) => (dispatch) => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds))
 
-    return fetch(baseUrl + 'users/login', {
+    return fetch(`${baseUrl}api/users/login`, {
         method: 'POST',
         headers: { 
             'Content-Type':'application/json' 
@@ -70,7 +70,7 @@ export const loginError = (message) => {
 export const registerUser = (creds) => (dispatch) => {
     dispatch(requestRegister(creds))
 
-    return fetch(baseUrl + 'users/register', {
+    return fetch(`${baseUrl}api/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type':'application/json' 
@@ -152,7 +152,7 @@ export const logoutUser = () => (dispatch) => {
 
 
 export const postItem = (info) => (dispatch) => {
-    return fetch(baseUrl + 'items', {
+    return fetch(`${baseUrl}api/items`, {
         method: 'POST',
         body: JSON.stringify(info),
         headers: {
@@ -184,7 +184,7 @@ export const postItem = (info) => (dispatch) => {
 export const deleteItem = (itemId) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'items/' + itemId, {
+    return fetch(`${baseUrl}api/items/${itemId}`, {
         method: "DELETE",
         headers: {
           'Authorization': bearer
@@ -227,7 +227,7 @@ export const uploadImages = (images) => ({
 export const fetchItems = () => (dispatch) => {
     dispatch(itemsLoading());
 
-    return fetch(baseUrl + 'items')
+    return fetch(`${baseUrl}api/items`)
     .then(response => {
         if (response.ok) {
             return response;
@@ -250,7 +250,7 @@ export const fetchItems = () => (dispatch) => {
 export const fetchLatestItems = () => (dispatch) => {
     dispatch(itemsLoading());
 
-    return fetch(baseUrl + 'items/latest')
+    return fetch(`${baseUrl}api/items/latest`)
     .then(response => {
         if (response.ok) {
             return response;
@@ -275,7 +275,7 @@ export const fetchCategoryItem = (category) => (dispatch) => {
     
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'items/' + category, {
+    return fetch(`${baseUrl}api/items/${category}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -308,7 +308,7 @@ export const fetchItemId = (ItemId) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
 
-    return fetch(baseUrl + 'items/' + ItemId, {
+    return fetch(`${baseUrl}api/items/${ItemId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -339,7 +339,7 @@ export const fetchUserItems = (email) => (dispatch) => {
     dispatch(itemsLoading());
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'items/email/' + email, {
+    return fetch(`${baseUrl}api/items/email/${email}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -371,7 +371,7 @@ export const fetchNameItems = (keyword) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
 
-    return fetch(baseUrl + 'items/name/' + keyword, {
+    return fetch(`${baseUrl}api/items/name/${keyword}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
