@@ -14,7 +14,7 @@ class SellSomething extends Component {
             ItemName:'',
             ItemType1:'...',
             ItemType2:'',
-            ItemPrice:null,
+            ItemPrice:'',
             ItemDescription:'',
             SellerEmail:this.props.auth.user ? this.props.auth.user.username : '',
             validate: {
@@ -35,7 +35,30 @@ class SellSomething extends Component {
         this.validatePrice = this.validatePrice.bind(this); 
     }
 
-        
+
+
+    componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.postItems.items !==  prevProps.postItems.items ) {
+            this.setState({
+            ItemName:'',
+            ItemType1:'...',
+            ItemType2:'',
+            ItemPrice:'',
+            ItemDescription:'',
+            SellerEmail:this.props.auth.user ? this.props.auth.user.username : '',
+            validate: {
+                ItemNameState:'',
+                ItemType1State:'',
+                ItemDescriptionState:'',
+                ItemPriceState:''
+            },
+            images:[]});
+
+            alert("Item uploaded. Thank you.")
+        }
+      }
+
     handleChange = (event) => {
         const {target} =event;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -101,6 +124,7 @@ class SellSomething extends Component {
     handleImages = (childData) => {
         this.setState({images:childData})
     }
+
     render() {
         if (!this.props.auth.isAuthenticated) {
             return(
@@ -125,7 +149,8 @@ class SellSomething extends Component {
                                 this.validateName(e);
                             }}
                             type="text" name="ItemName" id="ItemName" 
-                            placeholder="..." bsSize="lg" className="mt-3" 
+                            placeholder="..." bsSize="lg" className="mt-3"
+                            value={this.state.ItemName}
                             valid={this.state.validate.ItemNameState === "passed"}
                             invalid={this.state.validate.ItemNameState === "not passed"}
                             />
@@ -144,7 +169,7 @@ class SellSomething extends Component {
                             this.validateType1(e);
                         }}
                         type="select" name="ItemType1" id="ItemType1" 
-                        bsSize="lg" className="mt-5" 
+                        bsSize="lg" className="mt-5" value={this.state.ItemType1}
                         valid={this.state.validate.ItemType1State === "passed"}
                         invalid={this.state.validate.ItemType1State === "not passed"}
                         >
@@ -171,7 +196,7 @@ class SellSomething extends Component {
                             this.handleChange(e);
                         }}
                         type="select" name="ItemType2" id="ItemType2" 
-                        bsSize="lg" className="mt-5">
+                        bsSize="lg" className="mt-5" value={this.state.ItemType2}>
                             <option>...</option>
                             <option>Cloth</option>
                             <option>Shoes</option>
@@ -195,8 +220,8 @@ class SellSomething extends Component {
                                 this.validatePrice(e);
                             }}
                             type="number" name="ItemPrice" 
-                            id="ItemPrice" bsSize="lg"  
-                            rows={6} className="mt-5" 
+                            id="ItemPrice" bsSize="lg" step="0.01" 
+                            rows={6} className="mt-5" value={this.state.ItemPrice}
                             valid = {this.state.validate.ItemPriceState==="passed"}
                             invalid = {this.state.validate.ItemPriceState==="not passed"}/>
                             <FormFeedback>Unreasonable Price</FormFeedback>
@@ -214,7 +239,7 @@ class SellSomething extends Component {
                             }}
                             type="textarea" name="ItemDescription" 
                             id="ItemDescription" bsSize="lg"  
-                            rows={6} className="mt-5" 
+                            rows={6} className="mt-5" value={this.state.ItemDescription}
                             valid = {this.state.validate.ItemDescriptionState==="passed"}
                             invalid = {this.state.validate.ItemDescriptionState==="not passed"}/>
                             <FormFeedback>Description needs to have more than 20 characters</FormFeedback>
@@ -225,7 +250,7 @@ class SellSomething extends Component {
                     <FormGroup row>
                         <Label xs={{offset: 1, size: 2}} size="lg" className="mt-4">Item Images</Label>
                         <Col  className="mt-5">
-                            <ImageUpload  uploadImages={this.props.uploadImages} handleImages={this.handleImages}/>
+                            <ImageUpload   handleImages={this.handleImages} postItems={this.props.postItems}/>
                             <FormText>Upload at least one and at most six images</FormText>
                         </Col>
                     </FormGroup>

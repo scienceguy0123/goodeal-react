@@ -11,6 +11,17 @@ class ImageUpload extends Component {
     this.onImageRemove = this.onImageRemove.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.postItems.items !==  prevProps.postItems.items ) {
+        this.setState({
+          newImages: []
+        });
+
+        alert("Item uploaded. Thank you.")
+    }
+  }
+
   fileChangedHandler(event) {
     var fileInput = false;
     if (event.target.files[0]) {

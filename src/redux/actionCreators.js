@@ -152,11 +152,16 @@ export const logoutUser = () => (dispatch) => {
 
 
 export const postItem = (info) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    dispatch(postItemLoading());
+
     return fetch(`${baseUrl}api/items`, {
         method: 'POST',
         body: JSON.stringify(info),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+            
         },
         credentials: 'same-origin'
     })
@@ -217,6 +222,10 @@ export const postItemFailed = (errMess) => ({
     type: ActionTypes.POST_ITEM_FAILED,
     payload: errMess
 })
+
+export const postItemLoading = () => ({
+    type: ActionTypes.POST_ITEM_FAILED
+});
 
 
 export const uploadImages = (images) => ({

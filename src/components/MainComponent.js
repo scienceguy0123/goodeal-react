@@ -17,7 +17,7 @@ const mapStateToProps = state => {
     return {
         auth: state.auth,
         register: state.register ,
-        postItem:state.postItem,
+        postItems:state.postItems,
         items: state.items
 
     }
@@ -58,7 +58,7 @@ class Main extends Component{
         }
         if (!this.props.auth.isAuthenticated && this.props.auth.errMess !== prevProps.auth.errMess 
             && this.props.auth.errMess !== null) {
-          alert(this.props.auth.errMess + 'please check the validation email in your. It could be in spam.');
+          alert(this.props.auth.errMess );
         }
       }
 
@@ -119,10 +119,12 @@ class Main extends Component{
                                                             fetchLatestItems={this.props.fetchLatestItems}
                                                             fetchNameItems={this.props.fetchNameItems}
                                                              {...props}           />}/>
-                    <Route path='/user/sellsomething' component={() => <SellSomething
+                    <Route path='/user/sellsomething' render={() => <SellSomething
                                                                     postItem={this.props.postItem}
                                                                     uploadImages={this.props.uploadImages}
-                                                                    auth={this.props.auth}/>}/>
+                                                                    auth={this.props.auth}
+                                                                    postItems={this.props.postItems}
+                                                                    />}/>
                     
                     <Route exact path='/user/selling' render={() => <UserSellingPage
                                                                     fetchUserItems={this.props.fetchUserItems}

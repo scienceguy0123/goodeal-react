@@ -101,7 +101,7 @@ class ItemPage extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col className="mb-5">
                         <h3 className="mt-5 ms-5 content">{this.props.items.items[0].ItemDescription}</h3>
                     </Col>
                 </Row>

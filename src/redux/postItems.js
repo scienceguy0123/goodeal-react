@@ -2,16 +2,19 @@ import * as ActionTypes from './actionTypes';
 
 export const PostItems = ( state = {
     isLoading: false,
-    postItems : [],
+    items : [],
     errMess : null
 }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_POST_ITEM:
             let item = action.payload;
-            return {...state,items:state.postItems.concat(item), errMess: null};
+            return {...state, items:state.items.concat(item), errMess: null};
 
         case ActionTypes.POST_ITEM_FAILED:
-            return {...state, isLoading:false, items:state.postItems, errMess:action.payload};
+            return {...state, isLoading:false, items:state.items, errMess:action.payload};
+
+        case ActionTypes.LOAD_POST_ITEM:
+            return {...state, isLoading:true, items:state.items, errMess: null};
 
         default:
             return state
