@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import UserSellingItem from './UserSellingItem';
+import {Loading} from './LoadingComponent';
 
 class UserSellingPage extends Component {
     constructor(props) {
@@ -24,6 +25,15 @@ class UserSellingPage extends Component {
             return(
                 <h1> Please Login first</h1>
             )
+        }
+        if (this.props.items.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            );
         }
         return(
             <Container>

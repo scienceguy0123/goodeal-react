@@ -3,6 +3,8 @@ import { Card, CardImg, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import './RenderCardComponent.css';
+import {Loading} from './LoadingComponent';
+
 
 class RenderCard extends Component {
 
@@ -11,6 +13,9 @@ class RenderCard extends Component {
     }
 
     render() {
+        
+
+        
         return(
             <div>
                 <Card>

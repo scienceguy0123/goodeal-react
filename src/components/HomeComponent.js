@@ -3,6 +3,7 @@ import SearchBar from './SeachbarComponent.js';
 import Category from './CategoryComponent.js';
 import LatestAdditions from './LatestAdditionsComponent.js';
 import RenderCard from './RenderCardComponent';
+import {Loading} from './LoadingComponent';
 
 class Home extends Component {
     constructor(props) {
@@ -33,12 +34,22 @@ class Home extends Component {
                 </div>
 
 
+                { this.props.items.isLoading ?
+
+
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+                :
                 <div className="lastestAddition">
                     <LatestAdditions items={this.props.items}
                                 auth={this.props.auth}/>
                     
                    
                 </div>
+                }
             </div>
         )
     }

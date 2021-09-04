@@ -63,7 +63,7 @@ class Main extends Component{
         //fire when user's token is expired
         if(this.props.auth.isAuthenticated && this.props.items.errMess === "Error 401: Unauthorized") {
             alert('Authentication expires, please login again');
-            logoutUser();
+            this.props.logoutUser();
         }
       }
 
@@ -135,7 +135,8 @@ class Main extends Component{
                                                                     fetchUserItems={this.props.fetchUserItems}
                                                                     auth={this.props.auth}
                                                                     items={this.props.items}
-                                                                    deleteItem={this.props.deleteItem} /> }/>
+                                                                    deleteItem={this.props.deleteItem} /> 
+                                                                    }/>
                     
                     <Route  exact path='/items/:category' render={CategoryItemsPage} />
                     <Route exact path='/items/name/:keyword' render={searchNameItemsPage} />

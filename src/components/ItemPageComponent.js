@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Container, Row, Col,  } from 'reactstrap';
 import {ItemPageCarousel} from './ItemPageCarousel';
 import {  Redirect } from 'react-router-dom';
+import {Loading} from './LoadingComponent';
+
 
 import './ItemPageComponent.css'
 class ItemPage extends Component {
@@ -28,9 +30,22 @@ class ItemPage extends Component {
             <h1> Please Login first</h1>
             )
         }
+
+        if (this.props.items.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        
         if(this.props === null || this.props.items.items.length === 0){
             return null;
         }
+
+
 
         return(
             <div>

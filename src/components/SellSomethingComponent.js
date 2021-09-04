@@ -4,6 +4,8 @@ Container, Row, Col } from 'reactstrap';
 import './SellSomethingComponent.css';
 import ImageUpload from './ImageUploadComponent';
 import { Redirect } from 'react-router-dom';
+import {Loading} from './LoadingComponent';
+
 
 
 class SellSomething extends Component {
@@ -143,6 +145,14 @@ class SellSomething extends Component {
             return(
             <h1> Please Login first</h1>
             )}
+
+        if ( this.props.postItems.isLoading) {
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        }
         return (
             <Container>
                 <Row>

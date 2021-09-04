@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import RenderCard from './RenderCardComponent';
 import {Container, Row, Col} from 'reactstrap';
 import { Redirect } from 'react-router-dom';
+import {Loading} from './LoadingComponent';
+
 
 
 class SearchNameItems extends Component {
@@ -22,11 +24,24 @@ class SearchNameItems extends Component {
       }
 
     render() {
+
+        
         if (!this.props.auth.isAuthenticated) {
             return(
                 <h1>Please login first</h1>
             )
         }
+
+        if (this.props.items.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        
         return(
             <Container>
                 <Row className="mt-5">

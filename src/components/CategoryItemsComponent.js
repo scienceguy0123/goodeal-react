@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RenderCard from './RenderCardComponent';
 import {Container, Row, Col, Alert} from 'reactstrap';
 import { Redirect } from 'react-router-dom';
+import {Loading} from './LoadingComponent';
 
 class CategoryItems extends Component {
     constructor(props) {
@@ -28,6 +29,16 @@ class CategoryItems extends Component {
             return (
                 <h1> Please Login first</h1>
             )}
+        
+        if (this.props.items.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
 
         return(
             <Container>
