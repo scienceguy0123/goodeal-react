@@ -224,7 +224,7 @@ export const postItemFailed = (errMess) => ({
 })
 
 export const postItemLoading = () => ({
-    type: ActionTypes.POST_ITEM_FAILED
+    type: ActionTypes.LOAD_POST_ITEM
 });
 
 

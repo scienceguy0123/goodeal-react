@@ -26,7 +26,7 @@ class UserSellingItem extends Component {
 
         return(
             
-                <Row className="mt-5" >
+                <Row className="mt-5 mb-5" >
                     <Col xs={{size:1}} className="bg-light">
                         <Link to={`/item/${this.props.item._id}`} style={{ color:'inherit', textDecoration: 'none' }}>
                             <img src={this.props.item.Images[0]} width="100" height="100" ></img>

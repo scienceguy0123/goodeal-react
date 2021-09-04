@@ -8,7 +8,7 @@ export const PostItems = ( state = {
     switch(action.type) {
         case ActionTypes.ADD_POST_ITEM:
             let item = action.payload;
-            return {...state, items:state.items.concat(item), errMess: null};
+            return {...state, isLoading:false, items:state.items.concat(item), errMess: null};
 
         case ActionTypes.POST_ITEM_FAILED:
             return {...state, isLoading:false, items:state.items, errMess:action.payload};

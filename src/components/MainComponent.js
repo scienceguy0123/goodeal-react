@@ -60,6 +60,11 @@ class Main extends Component{
             && this.props.auth.errMess !== null) {
           alert(this.props.auth.errMess );
         }
+        //fire when user's token is expired
+        if(this.props.auth.isAuthenticated && this.props.items.errMess === "Error 401: Unauthorized") {
+            alert('Authentication expires, please login again');
+            logoutUser();
+        }
       }
 
 

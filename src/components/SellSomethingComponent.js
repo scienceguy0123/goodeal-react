@@ -21,7 +21,8 @@ class SellSomething extends Component {
                 ItemNameState:'',
                 ItemType1State:'',
                 ItemDescriptionState:'',
-                ItemPriceState:''
+                ItemPriceState:'',
+                ImageState:''
             },
             images:[]
         }
@@ -39,7 +40,8 @@ class SellSomething extends Component {
 
     componentDidUpdate(prevProps) {
         // Typical usage (don't forget to compare props):
-        if (this.props.postItems.items !==  prevProps.postItems.items ) {
+        if (this.props.postItems.items.length !== prevProps.postItems.items.length && prevProps.postItems.isLoading === true && 
+            this.props.postItems.isLoading === false && this.props.postItems.errMess === null) {
             this.setState({
             ItemName:'',
             ItemType1:'...',
@@ -51,9 +53,11 @@ class SellSomething extends Component {
                 ItemNameState:'',
                 ItemType1State:'',
                 ItemDescriptionState:'',
-                ItemPriceState:''
+                ItemPriceState:'',
+                ImageState:''
             },
             images:[]});
+            console.log('fire');
 
             alert("Item uploaded. Thank you.")
         }
@@ -108,6 +112,8 @@ class SellSomething extends Component {
         this.setState({validate});
     }
 
+    
+
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state.images);
@@ -122,7 +128,14 @@ class SellSomething extends Component {
 
 
     handleImages = (childData) => {
-        this.setState({images:childData})
+        this.setState({images:childData});
+        const {validate} = this.state;
+        if (this.state.images.length === 0){
+            validate.ImageState = "not passed";
+        }else{
+            validate.ImageState = "passed";
+        }
+        this.setState({validate});
     }
 
     render() {
@@ -261,7 +274,8 @@ class SellSomething extends Component {
                             <Button 
                             disabled ={this.state.validate.ItemDescriptionState != "passed" ||
                                         this.state.validate.ItemNameState != "passed" ||
-                                        this.state.validate.ItemType1State != "passed"}
+                                        this.state.validate.ItemType1State != "passed" ||
+                                        this.state.validate.ImageState != "passed"}
                             type="submit" 
                             value="submit" 
                             color="primary" 
