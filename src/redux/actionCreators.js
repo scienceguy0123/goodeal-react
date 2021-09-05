@@ -73,7 +73,7 @@ export const registerUser = (creds) => (dispatch) => {
     return fetch(`${baseUrl}api/users/register`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(creds)
     })
