@@ -70,10 +70,10 @@ export const loginError = (message) => {
 export const registerUser = (creds) => (dispatch) => {
     dispatch(requestRegister(creds))
 
-    return fetch(`${baseUrl}api/users/register`, {
+    return fetch(`${baseUrl}/api/users/register`, {
         method: 'POST',
         headers: {
-            'Content-Type':'application/json' 
+            'Content-Type': 'text/plain;charset=utf-8'
         },
         body: JSON.stringify(creds)
     })
@@ -275,6 +275,7 @@ export const fetchLatestItems = () => (dispatch) => {
         throw errmess;
     })
     .then(response => response.json())
+
     .then(items => dispatch(addItems(items)))
     .catch(error => dispatch(itemsFailed(error.message)));
 };

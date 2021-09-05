@@ -121,6 +121,8 @@ class Main extends Component{
 
                 <Switch>
                     <Route path='/home' render={(props) =>  <Home items={this.props.items}
+                                                            auth={this.props.auth}
+                                                            register={this.props.register}
                                                             fetchLatestItems={this.props.fetchLatestItems}
                                                             fetchNameItems={this.props.fetchNameItems}
                                                              {...props}           />}/>

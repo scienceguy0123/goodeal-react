@@ -21,6 +21,15 @@ class Home extends Component {
     
 
     render() {
+        if (this.props.register.isLoading || this.props.auth.isLoading) {
+            return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+            )
+        }
         return (
             <div>
 
