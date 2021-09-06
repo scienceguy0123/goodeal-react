@@ -5012,6 +5012,16 @@
     "signal-exit" "^3.0.2"
     "strip-final-newline" "^2.0.0"
 
+"exif-auto-rotate@^0.3.4":
+  "integrity" "sha512-GlqMQGf48d0qwV4XxHFoMo6AmrjFMkV889UL3YFxv1QNPLhwFWYyEwVXsJleJNRUoiiEwBxJlePGeS/PasRWYw=="
+  "resolved" "https://registry.npmjs.org/exif-auto-rotate/-/exif-auto-rotate-0.3.4.tgz"
+  "version" "0.3.4"
+
+"exifremove@^1.0.1":
+  "integrity" "sha512-a4VrNsSgpKBo9dHFsRi098XYm/X8dHP2NPA4N/3WAIxInQ8VHOfic/F8uAMIlWk4QRurTFwClFUb0QkMj4nqHg=="
+  "resolved" "https://registry.npmjs.org/exifremove/-/exifremove-1.0.1.tgz"
+  "version" "1.0.1"
+
 "exit@^0.1.2":
   "integrity" "sha1-BjJjj42HfMghB9MKD/8aF8uhzQw="
   "resolved" "https://registry.npmjs.org/exit/-/exit-0.1.2.tgz"

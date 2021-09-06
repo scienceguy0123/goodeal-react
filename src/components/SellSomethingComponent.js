@@ -274,7 +274,9 @@ class SellSomething extends Component {
                         <Label xs={{offset: 1, size: 2}} size="lg" className="mt-4">Item Images</Label>
                         <Col  className="mt-5">
                             <ImageUpload   handleImages={this.handleImages} postItems={this.props.postItems}/>
-                            <FormText>Upload at least one and at most six images</FormText>
+                            <FormText>Upload at least one and at most six images. Currenly does not support HEIC, iPhone users
+                                could switch their camera setting to shoot JPEG.
+                            </FormText>
                         </Col>
                     </FormGroup>
             

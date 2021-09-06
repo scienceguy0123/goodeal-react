@@ -1,6 +1,7 @@
 import React , { Component }from 'react';
 import Resizer from "react-image-file-resizer";
 
+
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ class ImageUpload extends Component {
           newImages: []
         });
 
-        alert("Item uploaded. Thank you.")
+        
     }
   }
 
@@ -27,6 +28,8 @@ class ImageUpload extends Component {
     if (event.target.files[0]) {
       fileInput = true;
     }
+    
+
     if (fileInput) {
       try {
         Resizer.imageFileResizer(
